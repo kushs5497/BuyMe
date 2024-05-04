@@ -11,14 +11,45 @@
 <title>BuyMe: Sorted Auction List (H->L)</title>
 </head>
 <style>
-		h1 {margin-top: 0px; font-size:30px;}
-		a:link { color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover {color: black; text-decoration: underline;}
-		table {border-collapse: collapse; width: 60%}
-		td { border: 1px solid #dddddd; text-align: center; padding: 11px;}
-		tr:nth-child(even) { background-color: #dddddd;}
-	</style>
+        h1 {
+            margin-top: 0;
+            font-size: 30px;
+        }
+        a:link, a:visited {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            color: black;
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 20px auto;
+        }
+        td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 11px;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .h1 {
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        select, input[type="text"], input[type="submit"] {
+            font-size: 15px;
+            height: 30px;
+            width: 275px;
+            margin-bottom: 10px;
+        }
+    </style>
 	<div class="h1"><h1><a href="LoginSuccess.jsp"> BuyMe </a></h1></div>
 <center><body>	
 <h1 style="font-size:25px"><strong>Sorted Auction List</strong></h1>
@@ -38,7 +69,7 @@
 			Statement stmt = con.createStatement();
 			
 			//ResultSetMetaData metaData = result.getMetaData();
-	        long millis=System.currentTimeMillis();
+	        long millis=java.time.Instant.now().toEpochMilli();
 	        java.sql.Timestamp time = new java.sql.Timestamp(millis); 
          	String currentTimeStamp = time.toString();
          	
