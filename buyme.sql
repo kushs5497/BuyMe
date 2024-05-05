@@ -41,7 +41,6 @@ CREATE TABLE `alerts` (
 
 LOCK TABLES `alerts` WRITE;
 /*!40000 ALTER TABLE `alerts` DISABLE KEYS */;
-INSERT INTO `alerts` VALUES (1,'You successfully bought sad.','as'),(1,'Your item named sad was sold.','het');
 /*!40000 ALTER TABLE `alerts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +96,6 @@ CREATE TABLE `bid_history` (
 
 LOCK TABLES `bid_history` WRITE;
 /*!40000 ALTER TABLE `bid_history` DISABLE KEYS */;
-INSERT INTO `bid_history` VALUES (1,111,'as');
 /*!40000 ALTER TABLE `bid_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +146,6 @@ CREATE TABLE `interests` (
 
 LOCK TABLES `interests` WRITE;
 /*!40000 ALTER TABLE `interests` DISABLE KEYS */;
-INSERT INTO `interests` VALUES ('smartwatch','as');
 /*!40000 ALTER TABLE `interests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +171,7 @@ CREATE TABLE `items` (
   PRIMARY KEY (`item_id`),
   KEY `username` (`username`),
   CONSTRAINT `items_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +180,6 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES (1,'sad','headphone','hgfcds','het',100,5,111,'2024-05-05 16:43:00',1,75);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +263,6 @@ CREATE TABLE `sold_items` (
 
 LOCK TABLES `sold_items` WRITE;
 /*!40000 ALTER TABLE `sold_items` DISABLE KEYS */;
-INSERT INTO `sold_items` VALUES (1,'headphone',111,'as');
 /*!40000 ALTER TABLE `sold_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,7 +286,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('admin','admin'),('as','as'),('het','qwe');
+INSERT INTO `user` VALUES ('admin','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -304,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-05 18:47:24
+-- Dump completed on 2024-05-05 18:57:19
