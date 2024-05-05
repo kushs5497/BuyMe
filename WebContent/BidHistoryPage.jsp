@@ -10,16 +10,47 @@
 <title>BuyMe: Bid History</title>
 </head>
 <style>
-		h1 {margin-top: 0px; font-size: 30px;}
-		a:link {color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover {color: black; text-decoration: underline;}
-		table {border-collapse: collapse; width: 40%}
-		td { border: 1px solid #dddddd; text-align: left; padding: 8spx; font-size: 18px;}
-		tr:nth-child(even) { background-color: #dddddd;}
-		.button-container form, .button-container form div { display: inline; }
-		.button-container button { display: inline; vertical-align: middle;}
-</style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <div class = 'container'>
 	<%
 		try {
 
@@ -90,6 +121,6 @@
 			
 		}
 %>
-
+</div>
 </body></center>
 </html>

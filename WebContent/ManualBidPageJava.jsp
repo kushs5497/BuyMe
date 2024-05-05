@@ -10,10 +10,39 @@
 <title>BuyMe: Bid Status</title>
 </head>
 <style>
-		h1 {margin-top: 0px;}
-		a:link, a:visited {color: black; text-decoration: none;}
-		a:hover{color: black; text-decoration: underline;}
-	</style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        input[type="button"] {
+            height: 30px;
+            width: 150px;
+            font-size: 15px;
+            border: none;
+            background-color: #f44336;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 	<div class="h1"><h1 style="font-size:28px"><strong> <a href="LoginSuccess.jsp"> BuyMe </a> </strong></h1></div>
 <center><body>	
 <br></br>

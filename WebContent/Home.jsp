@@ -12,16 +12,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="box">
             <h1>BuyMe</h1>
             		<form action="Login.jsp">
                 		<input type="submit" value="Login">
             		</form>
-            		
+            		<br>
             		<form action="Register.jsp">
                 		<input type="submit" value="Register">
             		</form>
-        </div>
     </div>
 </body>
 </html>

@@ -10,16 +10,68 @@
 <title>BuyMe: Bid History</title>
 </head>
 <style>
-		h1 {margin-top: 0px; font-size: 30px;}
-		a:link {color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover {color: black; text-decoration: underline;}
-		table {border-collapse: collapse; width: 40%}
-		td { border: 1px solid #dddddd; text-align: left; padding: 8spx; font-size: 18px;}
-		tr:nth-child(even) { background-color: #dddddd;}
-		.button-container form, .button-container form div { display: inline; }
-		.button-container button { display: inline; vertical-align: middle;}
-</style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 10px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .button-container form {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .button-container form input[type="submit"] {
+            font-size: 15px;
+            height: 30px;
+            width: 200px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button-container form input[type="submit"]:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.1);
+        }
+    </style>
+    <div class='container'>
 	<%
 		try {
 			
@@ -54,7 +106,7 @@
 			checkIfUserIsCustomerRepResults.beforeFirst();
 			if (checkIfUserIsCustomerRepResults.next()) {
 				out.println("<form style='text:align=center' action='RemoveBidJava.jsp'>");
-				out.println("<input type='submit' style='font-size:15px;height:30px;width:200px' value='Remove Bid'>");
+				out.println("<input type='submit' style='font-size: 15px;height: 30px; width: 200px;background-color: #4CAF50;color: white;border: none;border-radius: 4px;cursor: pointer;' value='Remove Bid'>");
 				out.println("</form>");
 			}
 			
@@ -78,6 +130,6 @@
 			
 		}
 %>
-
+</div>
 </body></center>
 </html>
