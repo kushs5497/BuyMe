@@ -67,9 +67,9 @@
             <select name="category">
                 <option value="" disabled="disabled" selected="selected">Select a category</option>
                 <option value="allItems" name="allItems">All Items</option>
-                <option value="phone" name="phone">Phone</option>
-                <option value="tablet" name="tablet">Tablet</option>
-                <option value="laptop" name="laptop">Laptop</option>
+                <option value="headphone" name="headphone">Headphone</option>
+                <option value="smartwatch" name="smartwatch">Smart Watch</option>
+                <option value="charger" name="chager">Charger</option>
             </select>
             <br><br>
             <input type="text" id="filter_min_price" name="filter_min_price" placeholder="Minimum Price (without $ sign) - optional">
