@@ -1,142 +1,120 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<!--Import some libraries that have classes that we need -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import = "java.text.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BuyMe: Sorted Auction List (L->H)</title>
-</head>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMe: Sorted Auction List (L->H)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
         h1 {
             margin-top: 0;
             font-size: 30px;
+            text-align: center;
         }
-        a:link, a:visited {
+        a {
             color: black;
             text-decoration: none;
         }
         a:hover {
-            color: black;
             text-decoration: underline;
         }
         table {
             border-collapse: collapse;
-            width: 60%;
+            width: 100%;
             margin: 20px auto;
         }
-        td {
+        th, td {
             border: 1px solid #dddddd;
             text-align: center;
             padding: 11px;
         }
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-        .h1 {
-            text-align: center;
+        th {
+            background-color: #f2f2f2;
         }
         form {
             text-align: center;
             margin-top: 20px;
         }
-        select, input[type="text"], input[type="submit"] {
+        input[type="text"], input[type="submit"] {
             font-size: 15px;
             height: 30px;
             width: 275px;
             margin-bottom: 10px;
+            border-radius: 4px;
+            border: none;
+            padding: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.1);
         }
     </style>
-	<div class="h1"><h1><a href="LoginSuccess.jsp"> BuyMe </a></h1></div>
-<center><body>	
-<h1 style="font-size:25px"><strong>Sorted Auction List</strong></h1>
-<br></br>
-<form action="AuctionList.jsp">
-	<input type="submit" style="font-size:15px;height:30px;width:125px" value="Reset">
-</form>
-<br>
-		<%
-		try {
-
-			//Get the database connection
-			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();
-			
-			//Create a SQL statement
-			Statement stmt = con.createStatement();
-			
-			//ResultSetMetaData metaData = result.getMetaData();
-	        long millis=java.time.Instant.now().toEpochMilli();
-	        java.sql.Timestamp time = new java.sql.Timestamp(millis); 
-         	String currentTimeStamp = time.toString();
-         	
-         	String update = "UPDATE items SET bought = true WHERE ? >= sell_by_date";
-		
-         	PreparedStatement ps = con.prepareStatement(update);
-
-			//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-			ps.setString(1, currentTimeStamp);
-			ps.executeUpdate();
-			
-			String query = "select name, item_id from items where bought is not true order by current_price asc";
-	        ResultSet result = stmt.executeQuery(query);
-    
-	        out.println("<form action='BuyPage.jsp'>");
-	        out.println("<table>");
-	        
-    		int size= 0;  
-    		if (!result.next()) {  
-    		  out.println("<h3 style='font-size:25px'><strong> No Items yet!</strong></h3>");
-    		}
-    		else {
-    			out.println("<tr>");
-    	        out.println("<td><strong><u><big>Items</big></u></strong></td>");
-        		out.println("</tr>");
-        		int i = 1;
-        		result.beforeFirst();
-    	        while(result.next()) {
-    	        	if (i % 2 != 0) {
-    	        		out.println("<tr>");
-    	        		out.println("<td><a style='font-size:18px' href='BuyPage.jsp?num="+ i + "'>" + result.getString(1) + "</a></td>");
-    		        	request.getSession().setAttribute("selectedItemID"+i, result.getString(2));
-    			        request.getSession().setAttribute("selectedItemName"+i, result.getString(1));
-    	        		out.println("</tr>");
-    	        	}
-    	        	else {
-    	        		out.println("<tr>");
-    	        		out.println("<td><a style='font-size:18px' href='BuyPage.jsp?num="+ i + "'>" + result.getString(1) + "</a></td>");
-    		        	request.getSession().setAttribute("selectedItemID"+i, result.getString(2));
-    			        request.getSession().setAttribute("selectedItemName"+i, result.getString(1));
-    	        		out.println("</tr>");
-    	        	}
-    	        	i++;
-    	        }
-    	        out.println("<table>");
-    	        out.println("</form>");
-    		}
-	        
-			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-			con.close();
-			
-			
-		} catch (Exception ex) {
-			out.print(ex);
-			out.print("fail");
-		}
-	%>
-	<form action="LoginSuccess.jsp">
-		<input type=hidden style="font-size:15px;height:30px;width:200px" value="Go back to main page">
-	</form>
-	<br><br>
-	<form action="LoginSuccess.jsp">
-		<input type="submit" style="font-size:15px;height:30px;width:200px" value="Go back to main page">
-	</form>
-
-<br><br>
-
-<br></br>
-</body></center>
+</head>
+<body>
+    <div class="container">
+        <div class="h1"><h1><a href="LoginSuccess.jsp">BuyMe</a></h1></div>
+        <h1>Sorted Auction List ($ -> $$$)</h1>
+        <form action="AuctionList.jsp">
+            <input type="submit" value="Reset">
+        </form>
+        <table>
+            <tr>
+                <th>Items</th>
+            </tr>
+            <%
+            try {
+                ApplicationDB db = new ApplicationDB();   
+                Connection con = db.getConnection();
+                Statement stmt = con.createStatement();
+                long millis=java.time.Instant.now().toEpochMilli();
+                java.sql.Timestamp time = new java.sql.Timestamp(millis); 
+                String currentTimeStamp = time.toString();
+                String update = "UPDATE items SET bought = true WHERE ? >= sell_by_date";
+                PreparedStatement ps = con.prepareStatement(update);
+                ps.setString(1, currentTimeStamp);
+                ps.executeUpdate();
+                String query = "select name, item_id from items where bought is not true order by current_price asc";
+                ResultSet result = stmt.executeQuery(query);
+                int i = 1;
+                while(result.next()) {
+                    out.println("<tr>");
+                    out.println("<td><a href='BuyPage.jsp?num="+ i + "'>" + result.getString(1) + "</a></td>");
+                    request.getSession().setAttribute("selectedItemID"+i, result.getString(2));
+                    request.getSession().setAttribute("selectedItemName"+i, result.getString(1));
+                    out.println("</tr>");
+                    i++;
+                }
+                con.close();
+            } catch (Exception ex) {
+                out.print(ex);
+                out.print("fail");
+            }
+            %>
+        </table>
+        <form action="LoginSuccess.jsp">
+            <input type="submit" value="Go back to main page">
+        </form>
+    </div>
+</body>
 </html>

@@ -1,79 +1,108 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<!--Import some libraries that have classes that we need -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BuyMe: Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMe: Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            height: 35px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<style>
-		h1 {margin-top: 0px;}
-		a:link {color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover{color: black; text-decoration: underline;}
-	</style>
-	<div class="h1"><h1 style="font-size:30px"><strong> <a href="Home.jsp"> BuyMe </a> </strong></h1></div>
-<center><body>	
-<br></br>
-		<%
-		try {
+<body>
+<div class="container">
+    <h1><strong><a href="Home.jsp">BuyMe</a></strong></h1>
+    <h2>Register</h2>
+    <%
+        try {
+            ApplicationDB db = new ApplicationDB();
+            Connection con = db.getConnection();
+            Statement stmt = con.createStatement();
 
-			//Get the database connection
-			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();
-			
-			//Create a SQL statement
-			Statement stmt = con.createStatement();
-			
-			//Get parameters from the HTML form at the Register.jsp
-			String user = request.getParameter("new_username");
-			String pass = request.getParameter("new_password");
-			String confirmPass = request.getParameter("confirm_new_password");
-			if (!pass.equals(confirmPass)) {
-				out.println("Passwords don't match");
-			}
-			else {
-				String query = "select * from user where username = \"" + user + "\"";
-		        ResultSet result = stmt.executeQuery(query);
-		        boolean inDb = result.first();
-		        if(inDb) {
-		    		out.print("Username is already taken. Please try a different username.");
-		        }
-		        else if (!inDb){
-		        	if(user.trim().equals("") || pass.trim().equals("")){
-		        		out.print("Cannot have a blank username or password");
-		        	}
-		        	else {
-		        	//Make an insert statement for the Sells table: 
-					String insert = "INSERT INTO user(username, password)"
-							+ "VALUES (?, ?)";
-					//Create a Prepared SQL statement allowing you to introduce the parameters of the query
-					PreparedStatement ps = con.prepareStatement(insert);
-
-					//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-					ps.setString(1, user);
-					ps.setString(2, pass);
-					ps.executeUpdate();
-		        	out.print("Sign up succeeded!");
-		        	}
-		        }
-			}
-			
-				
-			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-			con.close();
-			
-		} catch (Exception ex) {
-			out.print(ex);
-			out.print("insert failed");
-		}
-	%>
-	<br></br>
-	<form action="Home.jsp">
-		<input type="submit" value="Go back to main page">
-	</form>
-</body></center>
+            String user = request.getParameter("new_username");
+            String pass = request.getParameter("new_password");
+            String confirmPass = request.getParameter("confirm_new_password");
+            if (!pass.equals(confirmPass)) {
+                out.println("<p class='message'>Passwords don't match</p>");
+            } else {
+                String query = "select * from user where username = '" + user + "'";
+                ResultSet result = stmt.executeQuery(query);
+                boolean inDb = result.first();
+                if (inDb) {
+                    out.println("<p class='message'>Username is already taken. Please try a different username.</p>");
+                } else if (user.trim().equals("") || pass.trim().equals("")) {
+                    out.println("<p class='message'>Cannot have a blank username or password</p>");
+                } else {
+                    String insert = "INSERT INTO user(username, password) VALUES (?, ?)";
+                    PreparedStatement ps = con.prepareStatement(insert);
+                    ps.setString(1, user);
+                    ps.setString(2, pass);
+                    ps.executeUpdate();
+                    out.println("<p>Sign up succeeded!</p>");
+                }
+            }
+            con.close();
+        } catch (Exception ex) {
+            out.println("<p class='message'>" + ex + "<br>Insert failed</p>");
+        }
+    %>
+    <form action="Home.jsp">
+        <input type="submit" value="Go back to main page">
+    </form>
+</div>
+</body>
 </html>

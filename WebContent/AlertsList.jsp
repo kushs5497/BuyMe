@@ -12,65 +12,70 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f3f3f3;
             margin: 0;
             padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             margin-top: 0;
             font-size: 30px;
             text-align: center;
         }
-        a:link,
-        a:visited {
+        a {
             color: black;
             text-decoration: none;
         }
         a:hover {
-            color: black;
             text-decoration: underline;
         }
-        .h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
         form {
-            text-align: center;
             margin-top: 20px;
-        }
-        input[type="submit"] {
-            font-size: 15px;
-            height: 30px;
-            width: 180px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+            text-align: center;
         }
         table {
+            width: 100%;
             border-collapse: collapse;
-            width: 60%;
-            margin: 0 auto; /* Center align the table */
+            margin-top: 20px;
         }
-        td {
+        th, td {
             border: 1px solid #dddddd;
             text-align: center;
-            padding: 11px;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
         }
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+        input[type="submit"] {
+            height: 35px;
+            width: 180px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            border: none;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
-    <div class="h1">
+    <div class="container">
         <h1><a href="LoginSuccess.jsp"> BuyMe </a></h1>
-    </div>
     <h1><strong>Alert List</strong></h1>
     <br>
     <form action="InterestedPage.jsp">
@@ -124,5 +129,6 @@
     <form action="LoginSuccess.jsp">
         <input type="submit" value="Go back to main page">
     </form>
+</div>
 </body>
 </html>

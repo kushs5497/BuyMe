@@ -1,100 +1,117 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<!--Import some libraries that have classes that we need -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<%@ page import = "java.text.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BuyMe: Search Results</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMe: Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 30px;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        input[type="submit"] {
+            height: 35px;
+            width: 125px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
-<style>
-		h1 {margin-top: 0px; font-size:30px;}
-		a:link { color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover {color: black; text-decoration: underline;}
-		table {border-collapse: collapse; width: 60%}
-		td { border: 1px solid #dddddd; text-align: center; padding: 11px;}
-		tr:nth-child(even) { background-color: #dddddd;}
-	</style>
-	<div class="h1"><h1><a href="LoginSuccess.jsp"> BuyMe </a></h1></div>
-<center><body>	
-<h1 style="font-size:25px"><strong> Search Results </strong></h1>
-<br>
-<form action="QuestionsPage.jsp">
-	<input type="submit" style="font-size:15px;height:30px;width:125px" value="Reset">
-</form>
-<br>
-		<%
-		try {
+<body>
+<div class="container">
+    <h1><strong><a href="LoginSuccess.jsp">BuyMe</a></strong></h1>
+    <h1 style="font-size: 25px;"><strong>Search Results</strong></h1>
 
-			//Get the database connection
-			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();
-			
-			//Create a SQL statement
-			Statement stmt = con.createStatement();
-			Statement stmt2 = con.createStatement();
-			
-			String keyword = request.getParameter("keyword");
-			
-			String query = "select question, question_id from questions where question like '%" + keyword + "%'";
-	        ResultSet result = stmt.executeQuery(query);
-    
-	        out.println("<form action='QuestionsAnswersPage.jsp'>");
-	        out.println("<table>");
-	        
-    		int size= 0;  
-    		if (!result.next()) {  
-    		  out.println("<h3 style='font-size:25px'><strong> No Questions Yet!</strong></h3>");
-    		}
-    		else {
-    			out.println("<tr>");
-    	        out.println("<td><strong><u><big>Questions</big></u></strong></td>");
-        		out.println("</tr>");
-        		int i = 1;
-        		result.beforeFirst();
-    	        while(result.next()) {
-    	        	if (i % 2 != 0) {
-    	        		out.println("<tr>");
-    	        		out.println("<td><a style='font-size:18px' href='QuestionAnswersPage.jsp?num="+ i + "'>" + result.getString(1) + "</a></td>");
-    		        	request.getSession().setAttribute("selectedQuestionID"+i, result.getString(2));
-    			        request.getSession().setAttribute("selectedQuestion"+i, result.getString(1));
-    	        		out.println("</tr>");
-    	        	}
-    	        	else {
-    	        		out.println("<tr>");
-    	        		out.println("<td><a style='font-size:18px' href='QuestionAnswersPage.jsp?num="+ i + "'>" + result.getString(1) + "</a></td>");
-    		        	request.getSession().setAttribute("selectedQuestionID"+i, result.getString(2));
-    			        request.getSession().setAttribute("selectedQuestion"+i, result.getString(1));
-    	        		out.println("</tr>");
-    	        	}
-    	        	i++;
-    	        }
-    	        out.println("<table>");
-    	        out.println("</form>");
-    		}
-	        
-			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-			con.close();
-			
-			
-		} catch (Exception ex) {
-			out.print(ex);
-			out.print("insert failed");
-		}
-	%>
-	<form action="LoginSuccess.jsp">
-		<input type=hidden style="font-size:15px;height:30px;width:200px" value="Go back to main page">
-	</form>
-	<br><br>
-	<form action="LoginSuccess.jsp">
-		<input type="submit" style="font-size:15px;height:30px;width:200px" value="Go back to main page">
-	</form>
+    <form action="QuestionsPage.jsp" method="post">
+        <input type="submit" value="Reset">
+    </form>
 
-<br><br>
-<br></br>
-</body></center>
+    <% try {
+           ApplicationDB db = new ApplicationDB();	
+           Connection con = db.getConnection();
+           Statement stmt = con.createStatement();
+           String keyword = request.getParameter("keyword");
+           String query = "select question, question_id from questions where question like '%" + keyword + "%'";
+           ResultSet result = stmt.executeQuery(query);
+    %>
+    <form action="QuestionsAnswersPage.jsp">
+        <table>
+            <tr>
+                <th><strong><u>Questions</u></strong></th>
+            </tr>
+            <% int i = 1;
+               while(result.next()) { %>
+            <tr>
+                <td><a href="QuestionAnswersPage.jsp?num=<%= i %>"><%= result.getString(1) %></a></td>
+                <% request.getSession().setAttribute("selectedQuestionID" + i, result.getString(2));
+                   request.getSession().setAttribute("selectedQuestion" + i, result.getString(1));
+                   i++; %>
+            </tr>
+            <% } %>
+        </table>
+    </form>
+    <% con.close();
+       } catch (Exception ex) {
+          out.print(ex);
+          out.print("insert failed");
+       }
+    %>
+    <form action="LoginSuccess.jsp">
+        <input type="submit" value="Go back to main page">
+    </form>
+</div>
+</body>
 </html>

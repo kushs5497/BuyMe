@@ -1,41 +1,77 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<!--Import some libraries that have classes that we need -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BuyMe: Login Success</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMe: Login Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.1);
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            height: 40px;
+            width: 100px;
+            font-size: 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-<style>
-		h1 {margin-top: 0px;}
-		a:link {color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover{color: black; text-decoration: underline;}
-	</style>
-	<div class="h1"><h1 style="font-size:30px"><strong> <a href="AdminDashboard.jsp"> BuyMe </a> </strong></h1></div>
-<center><body>
-<br>
-<h1 style="font-size:25px"><strong> Create a Customer Representative Account </strong></h1>
-<br>
-
-<form action="CustomerRepRegisterJava.jsp">
-			<table>
-				<tr>    
-					<td>Customer Representative Username: </td><td><input type="text" name="cus_rep_username"></td>
-				</tr>
-				<tr>
-					<td>Customer Representative Password: </td><td><input type="password" name="cus_rep_password"></td>
-				</tr>
-				<tr>
-					<td>Customer Representative Confirm Password: </td><td><input type="password" name="confirm_cus_rep_password"></td>
-				</tr>
-			</table>
-			<br>
-			<input type="submit" style="font-size:15px;height:30px;width:100px" value="Register">
-		</form>
-
-</body></center>
+<body>
+<div class="container">
+    <h1><strong><a href="AdminDashboard.jsp">BuyMe</a></strong></h1>
+    <h2>Create a Customer Representative Account</h2>
+    <form action="CustomerRepRegisterJava.jsp" method="post">
+        <input type="text" name="cus_rep_username" placeholder="Customer Representative Username" required><br>
+        <input type="password" name="cus_rep_password" placeholder="Customer Representative Password" required><br>
+        <input type="password" name="confirm_cus_rep_password" placeholder="Confirm Password" required><br>
+        <input type="submit" value="Register">
+    </form>
+</div>
+</body>
 </html>

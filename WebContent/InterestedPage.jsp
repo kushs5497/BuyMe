@@ -1,43 +1,92 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<!--Import some libraries that have classes that we need -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<%@ page import = "java.text.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BuyMe: Interested</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMe: Interested</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 30px;
+        }
+        h3 {
+            font-size: 18px;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            margin: 20px auto;
+        }
+        td {
+            padding: 5px;
+        }
+        input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+        input[type="submit"] {
+            height: 35px;
+            width: 120px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
-<style>
-		h1 {margin-top: 0px; font-size:30px;}
-		a:link { color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover {color: black; text-decoration: underline;}
-		
-	</style>
-	<div class="h1"><h1><a href="LoginSuccess.jsp"> BuyMe </a></h1></div>
-<center><body>	
-<h1 style="font-size:25px"><strong> Set an Alert</strong></h1>
-<h3 style="font-size:18px"><strong> What items are you interested in?</strong></h3>
-<form action="InterestedPageJava.jsp">
-	<table>
-	<tr>    
-		<td><input type="checkbox" id="phone" name="typeOfDevice" value="phone"></td><td><label> Phones</label></td>
-	</tr>
-
-	<tr>
-		<td><input type="checkbox" id="laptop" name="typeOfDevice" value="laptop"></td><td><label> Laptops</label></td>
-	</tr>
-
-	<tr>
-		<td> <input type="checkbox" id="tablet" name="typeOfDevice" value="tablet"></td><td><label> Tablets</label></td>
-	</tr>
-	</table>
-	<br>
-  <input type="submit" style="font-size:15px;height:30px;width:100px" value="Set Alert">
-</form>
-
-</body></center>
-</html>r
+<body>
+<div class="container">
+    <h1>Set an Alert</h1>
+    <h3>What items are you interested in?</h3>
+    <form action="InterestedPageJava.jsp">
+        <table>
+            <tr>
+                <td><input type="checkbox" id="phone" name="typeOfDevice" value="phone"></td>
+                <td><label for="phone">Phones</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="laptop" name="typeOfDevice" value="laptop"></td>
+                <td><label for="laptop">Laptops</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="tablet" name="typeOfDevice" value="tablet"></td>
+                <td><label for="tablet">Tablets</label></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Set Alert">
+    </form>
+</div>
+</body>
+</html>

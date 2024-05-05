@@ -1,93 +1,132 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
-<!--Import some libraries that have classes that we need -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<%@ page import = "java.text.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BuyMe: Questions</title>
-</head>
-<style>
-		h1 {margin-top: 0px; font-size:30px;}
-		a:link { color: black; text-decoration: none;}
-		a:visited {color: black; text-decoration: none;}
-		a:hover {color: black; text-decoration: underline;}
-		table {border-collapse: collapse; width: 80%}
-		td { font-size:18px; border: 1px solid #dddddd; text-align: center; padding: 11px;}
-	</style>
-
-	<%
-	
-	//Get the database connection
-	ApplicationDB db = new ApplicationDB();	
-	Connection con = db.getConnection();
-	
-	//Create a SQL statement
-	Statement stmt = con.createStatement();
-	//Statement stmt2 = con.createStatement();
-	
-	String num = (String)request.getParameter("num");
-	request.getSession().setAttribute("questionNum", num);
-	
-	String question = (String)request.getSession().getAttribute("selectedQuestion"+num);
-	String questionID = (String)request.getSession().getAttribute("selectedQuestionID"+num);
-	request.getSession().setAttribute("question", question);
-	String username = (String)request.getSession().getAttribute("username");
-	
-	String checkIfUserIsCustomerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "'";
-	ResultSet checkIfUserIsCustomerRepResults = stmt.executeQuery(checkIfUserIsCustomerRepQuery);
-	if (checkIfUserIsCustomerRepResults.next()) {
-		out.println("<div class='h1'><h1><a href='CustomerRepHomePage.jsp'> BuyMe </a></h1></div>");
-	}
-	else {
-		out.println("<div class='h1'><h1><a href='LoginSuccess.jsp'> BuyMe </a></h1></div>");
-	}
-	out.println("<center><body>");
-	out.println("<tr>");
-    out.println("<td><h1><big>" + question + "</big></h1></td>");
-	out.println("</tr>");
-	out.println("<br>");
-	out.println("<br>");
-	out.println("<td><h2><big>Answers</big></h2></td>");
-	out.println("<br>");
-	
-	checkIfUserIsCustomerRepResults.beforeFirst();
-	if (checkIfUserIsCustomerRepResults.next()) {
-		out.println("<form style='text:align=center' action='AnswerQuestion.jsp'>");
-		out.println("<input type='submit' style='font-size:15px;height:30px;width:200px' value='Answer Question'>");
-		out.println("</form>");
-		out.println("<br>");
-	}
-	
-	String query = "select replys.reply, customer_reps.customer_rep_name from replys, customer_reps where replys.customer_rep_id = customer_reps.customer_rep_id and question_id = " + questionID; 
-	ResultSet result = stmt.executeQuery(query);
-	out.println("<table>");
-
-	if (!result.next()) {  
-	  out.println("<h3 style='font-size:25px'><strong> No Answers Yet!</strong></h3>");
-	}
-	else {
-		int i = 1;
-		result.beforeFirst();
-        while(result.next()) {
-        	if (i % 2 != 0) {
-        		out.println("<tr>");
-        		out.println("<td><strong>"+ result.getString(2) + " replied: </strong>" + result.getString(1) + "</td>");
-        		out.println("</tr>");
-        	}
-        	else {
-        		out.println("<tr>");
-        		out.println("<td><strong>"+ result.getString(2) + " replied: </strong>" + result.getString(1) + "</td>");
-        		out.println("</tr>");
-        	}
-        	i++;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMe: Question Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
-        out.println("<table>");
-	}
-	con.close();
-	%>
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            font-size: 18px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        input[type="submit"] {
+            height: 35px;
+            width: 200px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1), 0 3px 10px 0 rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1><strong><a href="LoginSuccess.jsp">BuyMe</a></strong></h1>
+    <h1>Question Details</h1>
+
+    <%
+        ApplicationDB db = new ApplicationDB();
+        Connection con = db.getConnection();
+        Statement stmt = con.createStatement();
+
+        String num = (String) request.getParameter("num");
+        request.getSession().setAttribute("questionNum", num);
+
+        String question = (String) request.getSession().getAttribute("selectedQuestion" + num);
+        String questionID = (String) request.getSession().getAttribute("selectedQuestionID" + num);
+        String username = (String) request.getSession().getAttribute("username");
+
+        String checkIfUserIsCustomerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "'";
+        ResultSet checkIfUserIsCustomerRepResults = stmt.executeQuery(checkIfUserIsCustomerRepQuery);
+
+        boolean isCustomerRep = checkIfUserIsCustomerRepResults.next();
+    %>
+
+    <h2><%= question %></h2>
+    <h3>Answers</h3>
+
+    <% if (isCustomerRep) { %>
+    <form action="AnswerQuestion.jsp">
+        <input type="submit" value="Answer Question">
+    </form>
+    <% } %>
+
+    <table>
+        <%
+            String query = "select replys.reply, customer_reps.customer_rep_name from replys, customer_reps where replys.customer_rep_id = customer_reps.customer_rep_id and question_id = " + questionID;
+            ResultSet result = stmt.executeQuery(query);
+
+            boolean hasAnswers = result.next();
+            if (!hasAnswers) {
+        %>
+        <tr>
+            <td colspan="2"><strong>No Answers Yet!</strong></td>
+        </tr>
+        <% } else {
+            int i = 1;
+            result.beforeFirst();
+            while (result.next()) { %>
+                <tr>
+                    <td><strong><%= result.getString(2) %> replied:</strong></td>
+                    <td><%= result.getString(1) %></td>
+                </tr>
+            <% }
+        } %>
+    </table>
+
+    <% con.close(); %>
+</div>
 </body>
 </html>
