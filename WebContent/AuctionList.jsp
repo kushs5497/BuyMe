@@ -158,7 +158,7 @@
                     ResultSet lastBidPriceResult = stmt4.executeQuery(lastBidPriceQuery);
                     if (lastBidPriceResult.next()) {
                         float lastBid = Float.parseFloat(lastBidPriceResult.getString(1));
-                        out.println(lastBid);
+                        //out.println(lastBid);
                         if (lastBid < price) {
                             continue;
                         } else {

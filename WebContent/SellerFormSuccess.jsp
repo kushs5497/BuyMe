@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Successfully Placed on Auction</title>
+    <center><title>Successfully Placed on Auction</title></center>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,7 +89,7 @@
                     alertPreparedStatement.setString(1, recentlyPostedItemId); 
                     alertPreparedStatement.setString(2, alertMessage); 
                     alertPreparedStatement.setString(3, currentUsername); 
-                    out.println(alertPreparedStatement.toString()); 
+                    //out.println(alertPreparedStatement.toString()); 
                     alertPreparedStatement.execute(); 
                 }
                 con.close();

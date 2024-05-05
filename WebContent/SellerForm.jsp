@@ -70,20 +70,23 @@
         <form action="SellerFormSuccess.jsp">
             <select name="category">
                 <option value="" disabled selected>Select a category</option>
-                <option value="phone">Phone</option>
-                <option value="tablet">Tablet</option>
-                <option value="laptop">Laptop</option>
+                <option value="headphone">Headphones</option>
+                <option value="smartwatch">Smart Watches</option>
+                <option value="charger">Chargers</option>
             </select>
             <br>
             <input type="text" name="item_name" placeholder="Item Name">
             <br>
             <textarea name="item_desc" style="height: 100px;" placeholder="Item Description (max. 300 characters)"></textarea>
             <br>
-            <input type="text" name="init_bid" placeholder="Starting Bid Price (without $ sign)">
+			<label for="init_bid">Starting Bid Price (without $ sign):</label>
+            <input type="text" name="init_bid" value = 0>
             <br>
-            <input type="text" name="bid_inc" placeholder="Bid Increment Amount (without $ sign)">
+            <label for="bid_inc">Bid Increment Amount (without $ sign):</label>
+            <input type="text" name="bid_inc" value = 0>
             <br>
-            <input type="text" name="res_price" placeholder="Reserve Price (without $ sign)">
+            <label for="res_price">Reserve Price (without $ sign):</label>
+            <input type="text" name="res_price" value = 0>
             <br>
             <label for="dur_auction">Auction End Date & Time:</label>
             <input type="datetime-local" name="dur_auction">

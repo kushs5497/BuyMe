@@ -61,6 +61,31 @@
 <div class="container">
     <h1><strong><a href="Home.jsp">BuyMe</a></strong></h1>
     <p>You have successfully set an alert! We'll let you know when an item of your interest is put up for auction!</p>
+    
+    <%
+    try{
+    	ApplicationDB db = new ApplicationDB();
+    	Connection con = db.getConnection();
+    	
+    	Statement stmt = con.createStatement();
+    	
+    	String typeOfDeviceSelected[] = request.getParameterValues("typeOfDevice");
+    	for(String t: typeOfDeviceSelected){
+    		String query = "INSERT INTO user_interests(type, username) VALUES(?, ?)";
+    		PreparedStatement ps = con.prepareStatement(query);
+    		ps.setString(1, t);
+    		ps.setString(2, request.getSession().getAttribute("username").toString());
+    		ps.executeUpdate();
+    	}
+    	
+    	con.close();
+    	
+    } catch(Exception ex){
+    	out.print(ex);
+    	out.print("Alert Add Failed, Please Try Again");  
+    }
+    	
+    	%>
     <form action="AlertsList.jsp">
         <input type="submit" value="Go back to Alerts">
     </form>
