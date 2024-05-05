@@ -74,7 +74,7 @@
                 // Create a SQL statement
                 Statement stmt = con.createStatement();
 
-                String query = "SELECT items.name, bought_items.price FROM items, bought_items WHERE items.item_id = bought_items.item_id ORDER BY price DESC LIMIT 10";
+                String query = "SELECT items.name, sold_items.price FROM items, sold_items WHERE items.item_id = sold_items.item_id ORDER BY price DESC LIMIT 10";
                 ResultSet result = stmt.executeQuery(query);
 
                 out.println("<h1>Best Selling Items (Top 10)</h1>");

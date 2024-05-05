@@ -42,7 +42,7 @@
         }
         else{
         	// check if user is a customer rep
-        	String customerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "' and customer_rep_password = '" + password + "'";
+        	String customerRepQuery = "select * from cust_reps where rep_name = '" + username + "' and rep_password = '" + password + "'";
         	ResultSet customerRepQueryResult = stmt.executeQuery(customerRepQuery);
         	if (customerRepQueryResult.first()) {
         		response.sendRedirect("CustomerRepHomePage.jsp");

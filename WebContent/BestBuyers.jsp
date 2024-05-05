@@ -74,7 +74,7 @@
                 // Create a SQL statement
                 Statement stmt = con.createStatement();
 
-                String query = "SELECT buyer, SUM(price) AS total_money_spent FROM bought_items GROUP BY buyer ORDER BY total_money_spent DESC LIMIT 10";
+                String query = "SELECT buyer, SUM(price) AS total_money_spent FROM sold_items GROUP BY buyer ORDER BY total_money_spent DESC LIMIT 10";
                 ResultSet result = stmt.executeQuery(query);
 
                 out.println("<h1>Best Buyers (Top 10)</h1>");

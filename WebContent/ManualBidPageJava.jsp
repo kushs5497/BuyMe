@@ -78,7 +78,7 @@
 			updatePs.executeUpdate();
 			
 			// Check if there's an automatic bid on the item we're looking at
-			String checkForAutomaticbid = "SELECT maximum_bid, bidder FROM automatic_bid WHERE item_id = " + itemID; 
+			String checkForAutomaticbid = "SELECT maximum_bid, bidder FROM auto_bid WHERE item_id = " + itemID; 
 			ResultSet automaticBidCheck = stmt.executeQuery(checkForAutomaticbid); 
 			if(automaticBidCheck.next()){
 				// At this point we know there'a an automatic bid on the same item a user is manually bidding on. 

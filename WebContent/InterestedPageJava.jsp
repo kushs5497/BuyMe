@@ -71,7 +71,7 @@
     	
     	String typeOfDeviceSelected[] = request.getParameterValues("typeOfDevice");
     	for(String t: typeOfDeviceSelected){
-    		String query = "INSERT INTO user_interests(type, username) VALUES(?, ?)";
+    		String query = "INSERT INTO interests(type, username) VALUES(?, ?)";
     		PreparedStatement ps = con.prepareStatement(query);
     		ps.setString(1, t);
     		ps.setString(2, request.getSession().getAttribute("username").toString());

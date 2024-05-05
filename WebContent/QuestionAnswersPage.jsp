@@ -88,7 +88,7 @@
         String questionID = (String) request.getSession().getAttribute("selectedQuestionID" + num);
         String username = (String) request.getSession().getAttribute("username");
 
-        String checkIfUserIsCustomerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "'";
+        String checkIfUserIsCustomerRepQuery = "select * from cust_reps where rep_name = '" + username + "'";
         ResultSet checkIfUserIsCustomerRepResults = stmt.executeQuery(checkIfUserIsCustomerRepQuery);
 
         boolean isCustomerRep = checkIfUserIsCustomerRepResults.next();
@@ -105,7 +105,7 @@
 
     <table>
         <%
-            String query = "select replys.reply, customer_reps.customer_rep_name from replys, customer_reps where replys.customer_rep_id = customer_reps.customer_rep_id and question_id = " + questionID;
+            String query = "select replys.reply, cust_reps.rep_name from replys, cust_reps where replys.customer_rep_id = cust_reps.rep_id and question_id = " + questionID;
             ResultSet result = stmt.executeQuery(query);
 
             boolean hasAnswers = result.next();

@@ -42,7 +42,7 @@
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();
 			
-			String bidHistoryUpdate = "INSERT INTO automatic_bid (item_id, bidder, maximum_bid, bid_increment) VALUES (?, ?, ?, ?)";
+			String bidHistoryUpdate = "INSERT INTO auto_bid (item_id, bidder, maximum_bid, bid_increment) VALUES (?, ?, ?, ?)";
 			PreparedStatement updatePs = con.prepareStatement(bidHistoryUpdate);
 			updatePs.setString(1, itemID); 
 			updatePs.setString(2, bidder); 

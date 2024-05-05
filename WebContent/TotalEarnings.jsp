@@ -76,7 +76,7 @@
 
                 out.println("<h1>Total Earnings</h1>");
 
-                String query = "SELECT SUM(price) FROM bought_items";
+                String query = "SELECT SUM(price) FROM sold_items";
                 ResultSet result = stmt.executeQuery(query);
                 if (result.next() && result.getString(1) == null) {
                     out.println("<h3>$0</h3>");

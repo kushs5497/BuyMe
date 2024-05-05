@@ -104,7 +104,7 @@
 			String username = (String)request.getSession().getAttribute("username");
 			
 			Statement stmtCR = con.createStatement();
-			String checkIfUserIsCustomerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "'";
+			String checkIfUserIsCustomerRepQuery = "select * from cust_reps where rep_name = '" + username + "'";
 			ResultSet checkIfUserIsCustomerRepResults = stmtCR.executeQuery(checkIfUserIsCustomerRepQuery);
 			if (checkIfUserIsCustomerRepResults.next()) {
 				out.println("<div class='h1'><h1><a href='CustomerRepHomePage.jsp'> BuyMe </a></h1></div>");
@@ -121,7 +121,7 @@
 			
 			
 			// Before rendering the item price, see if any automatic bidding stuff has to happen
-			String autobid = "SELECT * FROM automatic_bid WHERE item_id = \"" + itemid + "\"" ;
+			String autobid = "SELECT * FROM auto_bid WHERE item_id = \"" + itemid + "\"" ;
 			Statement stmt2 = con.createStatement();
 			ResultSet autobids = stmt2.executeQuery(autobid);
 			if(autobids.next()) {

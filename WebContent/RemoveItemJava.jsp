@@ -42,7 +42,7 @@
 			ps3.setString(1, itemid);
 			ps3.executeUpdate();
 			
-			String delete4 = "delete from automatic_bid where item_id = ?";
+			String delete4 = "delete from auto_bid where item_id = ?";
 			PreparedStatement ps4 = con.prepareStatement(delete4);
 			ps4.setString(1, itemid);
 			ps4.executeUpdate();

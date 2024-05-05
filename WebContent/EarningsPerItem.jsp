@@ -74,7 +74,7 @@
                 // Create a SQL statement
                 Statement stmt = con.createStatement();
 
-                String query = "SELECT items.name, bought_items.price FROM items, bought_items WHERE items.item_id = bought_items.item_id";
+                String query = "SELECT items.name, sold_items.price FROM items, sold_items WHERE items.item_id = sold_items.item_id";
                 ResultSet result = stmt.executeQuery(query);
 
                 out.println("<h1>Earnings per Item</h1>");

@@ -76,7 +76,7 @@
         if (!pass.equals(confirmPass)) {
             out.println("Passwords don't match");
         } else {
-            String query = "SELECT * FROM customer_reps WHERE customer_rep_name = ?";
+            String query = "SELECT * FROM cust_reps WHERE rep_name = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, user);
             ResultSet result = ps.executeQuery();
@@ -87,7 +87,7 @@
                 if (user.trim().equals("") || pass.trim().equals("")) {
                     out.print("Cannot have a blank username or password");
                 } else {
-                    String insert = "INSERT INTO customer_reps(customer_rep_name, customer_rep_password) VALUES (?, ?)";
+                    String insert = "INSERT INTO cust_reps(rep_name, rep_password) VALUES (?, ?)";
                     ps = con.prepareStatement(insert);
                     ps.setString(1, user);
                     ps.setString(2, pass);

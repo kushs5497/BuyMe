@@ -74,7 +74,7 @@
                 // Create a SQL statement
                 Statement stmt = con.createStatement();
 
-                String query = "SELECT category, SUM(price) FROM bought_items GROUP BY category";
+                String query = "SELECT category, SUM(price) FROM sold_items GROUP BY category";
                 ResultSet result = stmt.executeQuery(query);
 
                 out.println("<h1>Earnings per Item Type</h1>");

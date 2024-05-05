@@ -78,7 +78,7 @@
             Connection con = db.getConnection();
             Statement stmt = con.createStatement();
             String username = (String)request.getSession().getAttribute("username");
-            String checkIfUserIsCustomerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "'";
+            String checkIfUserIsCustomerRepQuery = "select * from cust_reps where rep_name = '" + username + "'";
             ResultSet checkIfUserIsCustomerRepResults = stmt.executeQuery(checkIfUserIsCustomerRepQuery);
             if (checkIfUserIsCustomerRepResults.next()) {
                 out.println("<h1 style = 'font-size = 24px'><a href='CustomerRepHomePage.jsp'>BuyMe</a></h1>");
@@ -176,7 +176,7 @@
 
                     boughtItemAlertStatement.executeUpdate();
 
-                    String insertIntoBoughtItems = "INSERT IGNORE INTO bought_items(item_id, category, price, buyer) VALUES (?, ?, ?, ?)";
+                    String insertIntoBoughtItems = "INSERT IGNORE INTO sold_items(item_id, category, price, buyer) VALUES (?, ?, ?, ?)";
                     PreparedStatement boughtItemsStatement = con.prepareStatement(insertIntoBoughtItems);
                     boughtItemsStatement.setString(1, allBoughtItemsResult.getString(1));
                     boughtItemsStatement.setString(2, allBoughtItemsResult.getString(3));

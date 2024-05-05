@@ -79,7 +79,7 @@
                 ResultSet findItemIdSet = stmt.executeQuery(findItemIdQuery); 
                 findItemIdSet.next(); 
                 String recentlyPostedItemId = (findItemIdSet.getString(1));
-                String listOfUsersInterested = "SELECT username FROM user_interests WHERE type = '"+category+"'"; 
+                String listOfUsersInterested = "SELECT username FROM interests WHERE type = '"+category+"'"; 
                 ResultSet usersInterestedSet = stmt.executeQuery(listOfUsersInterested);
                 while(usersInterestedSet.next()){
                     String currentUsername = usersInterestedSet.getString(1); 

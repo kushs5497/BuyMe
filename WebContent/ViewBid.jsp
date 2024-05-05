@@ -31,7 +31,7 @@
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
 			String username = (String)request.getSession().getAttribute("username");
-			String checkIfUserIsCustomerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "'";
+			String checkIfUserIsCustomerRepQuery = "select * from cust_reps where rep_name = '" + username + "'";
 			ResultSet checkIfUserIsCustomerRepResults = stmt.executeQuery(checkIfUserIsCustomerRepQuery);
 			if (checkIfUserIsCustomerRepResults.next()) {
 				out.println("<div class='h1'><h1><a href='CustomerRepHomePage.jsp'> BuyMe </a></h1></div>");

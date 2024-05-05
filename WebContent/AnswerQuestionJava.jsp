@@ -74,7 +74,7 @@
         String username = (String) request.getSession().getAttribute("username");
         String num = (String) request.getSession().getAttribute("questionNum");
         String reply = request.getParameter("answer_question");
-        String query = "select customer_rep_id from customer_reps where customer_rep_name = ?";
+        String query = "select rep_id from cust_reps where rep_name = ?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, username);
         ResultSet customerRepIDResult = ps.executeQuery();
