@@ -26,7 +26,7 @@
         h1 {
             margin-top: 0;
             text-align: center;
-            font-size: 30px;
+            font-size: 24px;
         }
         table {
             border-collapse: collapse;
@@ -81,9 +81,9 @@
             String checkIfUserIsCustomerRepQuery = "select * from customer_reps where customer_rep_name = '" + username + "'";
             ResultSet checkIfUserIsCustomerRepResults = stmt.executeQuery(checkIfUserIsCustomerRepQuery);
             if (checkIfUserIsCustomerRepResults.next()) {
-                out.println("<h1><a href='CustomerRepHomePage.jsp'>BuyMe</a></h1>");
+                out.println("<h1 style = 'font-size = 24px'><a href='CustomerRepHomePage.jsp'>BuyMe</a></h1>");
             } else {
-                out.println("<h1><a href='LoginSuccess.jsp'>BuyMe</a></h1>");
+                out.println("<h1 style = 'font-size = 24px'><a href='LoginSuccess.jsp'>BuyMe</a></h1>");
             }
         %>
         <h1>Auction List</h1>
