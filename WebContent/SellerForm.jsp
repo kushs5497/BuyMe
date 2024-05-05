@@ -70,9 +70,9 @@
         <form action="SellerFormSuccess.jsp">
             <select name="category">
                 <option value="" disabled selected>Select a category</option>
-                <option value="phone">Phone</option>
-                <option value="tablet">Tablet</option>
-                <option value="laptop">Laptop</option>
+                <option value="headphone">Headphones</option>
+                <option value="smartwatch">Smart Watches</option>
+                <option value="charger">Chargers</option>
             </select>
             <br>
             <input type="text" name="item_name" placeholder="Item Name">

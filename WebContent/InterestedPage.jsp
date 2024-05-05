@@ -72,16 +72,16 @@
     <form action="InterestedPageJava.jsp">
         <table>
             <tr>
-                <td><input type="checkbox" id="phone" name="typeOfDevice" value="phone"></td>
-                <td><label for="phone">Phones</label></td>
+                <td><input type="checkbox" id="headphone" name="typeOfDevice" value="headphone"></td>
+                <td><label for="headphone">Headphones</label></td>
             </tr>
             <tr>
-                <td><input type="checkbox" id="laptop" name="typeOfDevice" value="laptop"></td>
-                <td><label for="laptop">Laptops</label></td>
+                <td><input type="checkbox" id="charger" name="typeOfDevice" value="charger"></td>
+                <td><label for="charger">Chargers</label></td>
             </tr>
             <tr>
-                <td><input type="checkbox" id="tablet" name="typeOfDevice" value="tablet"></td>
-                <td><label for="tablet">Tablets</label></td>
+                <td><input type="checkbox" id="smartwatch" name="typeOfDevice" value="smartwatch"></td>
+                <td><label for="smartwatch">Smart Watches</label></td>
             </tr>
         </table>
         <br>
